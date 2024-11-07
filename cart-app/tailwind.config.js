@@ -2,7 +2,11 @@
 export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
-		extend: {},
+		extend: {
+			backgroundImage: {
+				'waffle-mobile': "url('/assets/image-waffle-mobile.jpg')",
+			},
+		},
+		plugins: [],
 	},
-	plugins: [],
 }
