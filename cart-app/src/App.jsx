@@ -1,5 +1,4 @@
-import './index.css'
-import ProductBox from '../components/product-box'
+import ProductBox from './components/product-box'
 
 function App() {
 	return (

@@ -2,9 +2,8 @@ import AddCartButton from './addCartButton'
 
 const ProductBox = () => {
 	return (
-		<div className='w-full h-full bg-black'>
+		<div className='w-full h-auto flex justify-center'>
 			<AddCartButton></AddCartButton>
-			<h1 className='text-5xl'>test</h1>
 		</div>
 	)
 }
