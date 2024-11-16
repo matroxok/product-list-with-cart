@@ -3,9 +3,9 @@ import AddCartButton from './addCartButton'
 const ProductBox = () => {
 	return (
 		<div className="w-full h-auto flex flex-col justify-center mb-10">
-			<div className="relative">
+			<div className={'relative flex justify-center'}>
+				<AddCartButton />
 				<img className="rounded-lg" src="/assets/image-waffle-mobile.jpg" alt="" />
-				<AddCartButton></AddCartButton>
 			</div>
 			<div className="mt-10 text-sm">
 				<p className="font-thin">Waffle</p>
