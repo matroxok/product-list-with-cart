@@ -10,6 +10,7 @@ const AddCartButton = () => {
 	const [isClicked, setIsClicked] = useState(false)
 	const [counter, setCounter] = useState(0)
 	const [isClickedMinus, setIsClickedMinus] = useState(false)
+	const [isClickedPlus, setIsClickedPLus] = useState(false)
 
 	const handleClick = () => {
 		setShowButton(true)
@@ -19,7 +20,15 @@ const AddCartButton = () => {
 	}
 
 	const minusCouner = () => {
-		console.log(counter)
+		if (counter > 0) {
+			setCounter(prevCount => prevCount - 1)
+		} else {
+			console.log('here!')
+		}
+	}
+
+	const plusCounter = () => {
+		setCounter(prevCount => prevCount + 1)
 	}
 
 	return (
@@ -33,7 +42,10 @@ const AddCartButton = () => {
 				}>
 				{showButton && (
 					<div
-						onClick={minusCouner}
+						onClick={e => {
+							e.stopPropagation()
+							minusCouner()
+						}}
 						className="bg-red-800 rounded-full flex justify-center items-center  hover:scale-110">
 						<RemoveIcon />
 					</div>
@@ -41,7 +53,12 @@ const AddCartButton = () => {
 				{isAdded || <AddShoppingCartIcon sx={{ color: 'red' }} />}
 				{isAdded ? <p className="font-bold text-xl">{counter}</p> : <p>Add to Cart</p>}
 				{showButton && (
-					<div className="bg-red-800 rounded-full flex justify-center items-center  hover:scale-110">
+					<div
+						onClick={e => {
+							e.stopPropagation()
+							plusCounter()
+						}}
+						className="bg-red-800 rounded-full flex justify-center items-center  hover:scale-110">
 						<AddIcon />
 					</div>
 				)}
