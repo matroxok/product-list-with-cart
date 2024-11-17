@@ -1,16 +1,13 @@
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
-import { useState } from 'react'
-import { useTheme } from '@emotion/react'
+import { useState, useEffect } from 'react'
 
 const AddCartButton = () => {
-	const [showButton, setShowButton] = useState(false) // Użyj bardziej opisowej nazwy
+	const [showButton, setShowButton] = useState(false)
 	const [isAdded, setIsAdded] = useState(false)
 	const [isClicked, setIsClicked] = useState(false)
 	const [counter, setCounter] = useState(0)
-	const [isClickedMinus, setIsClickedMinus] = useState(false)
-	const [isClickedPlus, setIsClickedPLus] = useState(false)
 
 	const handleClick = () => {
 		setShowButton(true)
@@ -19,17 +16,22 @@ const AddCartButton = () => {
 		setCounter(prevCount => prevCount + 1)
 	}
 
-	const minusCouner = () => {
-		if (counter > 0) {
-			setCounter(prevCount => prevCount - 1)
-		} else {
-			console.log('here!')
-		}
+	const minusCounter = () => {
+		setCounter(prevCount => Math.max(prevCount - 1, 0))
 	}
 
 	const plusCounter = () => {
 		setCounter(prevCount => prevCount + 1)
 	}
+
+	// Resetuje stan przycisku do pierwotnej formy, gdy counter === 0
+	useEffect(() => {
+		if (counter === 0) {
+			setShowButton(false)
+			setIsAdded(false)
+			setIsClicked(false)
+		}
+	}, [counter])
 
 	return (
 		<div className="absolute -bottom-5">
@@ -44,9 +46,9 @@ const AddCartButton = () => {
 					<div
 						onClick={e => {
 							e.stopPropagation()
-							minusCouner()
+							minusCounter()
 						}}
-						className="bg-red-800 rounded-full flex justify-center items-center  hover:scale-110">
+						className="bg-red-800 rounded-full flex justify-center items-center hover:scale-110">
 						<RemoveIcon />
 					</div>
 				)}
@@ -58,7 +60,7 @@ const AddCartButton = () => {
 							e.stopPropagation()
 							plusCounter()
 						}}
-						className="bg-red-800 rounded-full flex justify-center items-center  hover:scale-110">
+						className="bg-red-800 rounded-full flex justify-center items-center hover:scale-110">
 						<AddIcon />
 					</div>
 				)}
